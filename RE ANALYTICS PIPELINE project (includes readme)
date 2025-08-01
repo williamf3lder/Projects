@@ -1,0 +1,83 @@
+# Real Estate Market Analytics Pipeline
+
+This project simulates a real estate analytics pipeline using modern ELT tools: **Fivetran**, **Snowflake**, and **dbt**. The goal is to turn raw housing market data into actionable insights like price per square foot and time-on-market trends.
+
+---
+
+## Tools & Technologies
+- **Fivetran** (simulated via CSV ingestion)
+- **Snowflake** (cloud data warehouse)
+- **dbt Core** (data modeling and transformation)
+- **SQL** (analytics queries)
+- **Python** (for loading or prepping mock data)
+
+---
+
+## Project Architecture
+
+```
+CSV Files (Simulated Fivetran Extract)
+        ↓
+Raw Tables in Snowflake (Loaded manually or via Python)
+        ↓
+dbt Models (Staging → Marts)
+        ↓
+Analytics Queries & Dashboards
+```
+
+---
+
+## Sample Data (raw_properties.csv)
+
+| city    | price   | sqft | property_type |
+|---------|---------|------|----------------|
+| Austin  | 500000  | 2200 | house          |
+| Boston  | 600000  | 2500 | house          |
+| Atlanta | 350000  | 1800 | condo          |
+
+---
+
+## dbt Models
+- `stg_properties.sql`: Basic cleaning and standardization
+- `mart_avg_price.sql`: Calculates average price per square foot by city
+
+```sql
+-- mart_avg_price.sql
+SELECT
+  city,
+  ROUND(AVG(price / sqft), 2) AS avg_price_per_sqft
+FROM {{ ref('stg_properties') }}
+GROUP BY city
+```
+
+---
+
+## dbt Tests
+- `not_null` and `unique` tests on primary keys
+- Column-level descriptions
+- `accepted_values` for property_type (e.g., house, condo)
+
+---
+
+## Sample Output
+
+| city    | avg_price_per_sqft |
+|---------|---------------------|
+| Austin  | 227.27              |
+| Boston  | 240.00              |
+| Atlanta | 194.44              |
+
+---
+
+## Lessons Learned
+This project helped me better understand:
+- How dbt separates logic between staging and marts
+- The importance of testing and documentation in pipelines
+- How to simulate real-world tools (like Fivetran) in personal projects
+
+---
+
+## Next Steps
+- Connect real data source (API or Fivetran connector)
+- Add dashboard (Streamlit or Google Data Studio)
+- Automate ingestion with Airflow or Prefect (future iteration)
