@@ -1,0 +1,5 @@
+Data Pipeline for Battery Charging Behavior
+Personal Data Engineering Project | Python, Pandas, SQLite
+Designed and implemented an end-to-end ETL pipeline to simulate and process mobile battery charging data.
+Extracted and cleaned data from CSV files using Pandas; loaded structured data into SQLite for persistent storage.
+Developed analytics to uncover patterns such as charging frequency, average session length, and usage trends by time of day.
