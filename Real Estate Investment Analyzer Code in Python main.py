@@ -1,3 +1,6 @@
+(ONLINEGDB HAS FULL CODE AND DEPLOYABLE OPTION)
+
+
 # Real Estate Investment Analyzer
 # Calculates cash flow, cash-on-cash return, and cap rate from user input
 
